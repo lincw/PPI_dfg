@@ -1,0 +1,12 @@
+\section*{Abstract}
+
+Protein-protein interactions (PPIs) are fundamental to cellular function but vary dramatically across tissues. Current computational methods, relying largely on gene co-expression, fail to capture this context-specificity, creating a critical bottleneck for precision medicine. This proposal introduces a novel \textbf{Hybrid Neuro-Symbolic framework} that leverages Large Language Models (LLMs) as biological reasoning engines to predict tissue-specific interaction probabilities.
+
+By integrating multi-modal data---including RNA expression, protein abundance (PaxDB), and subcellular localization---into structured prompts, our approach moves beyond statistical correlation to semantic reasoning. Preliminary validation on 205 schizophrenia-related brain interactions demonstrates a \textbf{31.9\% improvement (F1=0.727)} over baselines. The project will:
+\begin{enumerate}
+    \item Generate a genome-scale tissue-resolved interactome using a high-throughput inference pipeline on a dedicated Mac Studio workstation;
+    \item Validate predictions through a tiered structural strategy (ESMFold/AlphaFold-Multimer) and heterogeneous Graph Neural Networks (GNNs);
+    \item Deploy automated literature-mining agents to maintain a "living" knowledge base.
+\end{enumerate}
+This work will deliver the first comprehensive, structurally-validated atlas of the human tissue interactome, directly empowering disease mechanism discovery and drug target prioritization.
+

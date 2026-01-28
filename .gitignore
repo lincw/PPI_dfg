@@ -250,3 +250,7 @@ TSWLatexianTemp*
 
 # generated if using elsarticle.cls
 *.spl
+.DS_Store
+*.pdf
+*.rtf
+*.gitignore

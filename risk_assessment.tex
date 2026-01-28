@@ -1,0 +1,14 @@
+\subsection*{Risk Assessment and Mitigation}
+
+\subsection{Technical Risks}
+\begin{itemize}
+    \item \textbf{LLM Performance Variability:} While LLMs can be sensitive to prompt phrasing, we mitigate this by implementing ensemble approaches with multiple LLM architectures. Furthermore, we will implement an \textbf{Expert-in-the-Loop Validation} protocol: a random subset of 100 generated reasoning traces will be manually reviewed by the PI to calibrate the automated scoring system and detect subtle hallucinations that automated metrics might miss.
+    \item \textbf{Scalability Challenges:} The computational cost of querying LLMs for millions of interactions is high. We address this through our optimized high-throughput inference pipeline on the Mac Studio and by transitioning to efficient distilled models for genome-scale inference (WP1 Task 1.3).
+\end{itemize}
+
+\paragraph{Biological Risks}
+\begin{itemize}
+    \item \textbf{Limited Validation Data:} High-quality tissue-specific PPI ground truth is scarce. We mitigate this by using experimentally validated datasets (synaptosome pulldowns for brain, co-abundance networks for other tissues) and orthogonal validation through structural prediction.
+    \item \textbf{Negative Set Definition:} Defining true-negative tissue-specific interactions is challenging. We address this by using organ-specific PPIs from orthogonal tissues (e.g., liver metabolic complexes as negatives for brain predictions) rather than relying on arbitrary expression thresholds.
+\end{itemize}
+

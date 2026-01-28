@@ -1,80 +1,77 @@
 \documentclass{scrartcl}
 
-%This template is based on the DFG rtf form (see Readme on GitHub for last accessed date, and version in the header of the compiled PDF)
-%
-%Author: Martin Hoelzer, hoelzer.martin@gmail.com
-%
-
 \usepackage[utf8]{inputenc}
 \usepackage[english]{proposal}
 
-% final version?
-\setboolean{finalcompile}{false}
+\setboolean{finalcompile}{true}
 
-% show DFG template version the current LaTeX template is based on in the header. Will be deactivated when 'finalcompile' is set 'true'
-\ifthenelse{\boolean{finalcompile}}{}{\ihead*{DFG-form 53.01 - 03/25}}
-
-% all config is done in Header.tex
 \input{Header.tex}
 
-% language dependent
-% change labels, e.g.:
+\ihead*{DFG-form 53.01 - 09/25}
+
+\linespread{1.2}
+\setlength{\parskip}{0.3em}
+
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=0pt, parsep=0pt, partopsep=0pt}
+
+% Define colors for Gantt chart
+\definecolor{barblue}{RGB}{51, 102, 153}
+\definecolor{groupblue}{RGB}{51, 102, 153}
+\definecolor{linkred}{RGB}{160, 0, 0}
+
+\RedeclareSectionCommand[
+  beforeskip=-1ex plus -1ex minus -.2ex,
+  afterskip=0.3ex plus .2ex
+]{section}
+\RedeclareSectionCommand[
+  beforeskip=-1ex plus -1ex minus -.2ex,
+  afterskip=0.2ex plus .2ex
+]{subsection}
+\RedeclareSectionCommand[
+  beforeskip=-1ex plus -1ex minus -.2ex,
+  afterskip=0.2ex plus .2ex
+]{subsubsection}
+
 \crefname{figure}{Figure}{Figures}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  TITLE PAGE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%  TITLE PAGE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\applicants}{[First name  last name, city of all applicants]}
-\newcommand{\project}{[Project title]}
+\newcommand{\applicants}{Dr. Chung-Wen Lin}
+\newcommand{\project}{LLM-Enhanced Tissue-Specific Protein-Protein Interaction Probability Estimation}
 
-% add bib entries here that you want to highlight in the text and publication list (bold)
-\addtocategory{important}{%
-fuchs2025varvamp,lamkiewicz2024ribap,galeone2025decoding, % Why the trailing comma? See: https://github.com/hoelzer/dfg/issues/69. TLDR; It is not important, but might prevent missing the comma when adding more entries to that list. 
+\addtocategory{important}{
+fuchs2025varvamp,lamkiewicz2024ribap,galeone2025decoding,
 }
 
 \begin{document}
 \pagestyle{empty}
 \setcounter{page}{1}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% A NICE TITLE PAGE - OPTIONAL BC NOT IN THE ORIGINAL DFG TEMPLATE
-% if you use the title page, set the \setcounter{page}{0} above!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\input{title_page}
+\input{abstract.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  MAIN MATTER  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \pagestyle{plain}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% For first-time proposals, please also note the following: Please provide a
-% concise description of your previous postgraduate training and research,
-% highlighting your abilities and demonstrating that you are capable of carrying
-% out the proposed project. Describe your scientific track record to date,
-% mentioning research topics that you've worked on so far. Previous scientific
-% accomplishments must not be directly related to the project.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  PROJECT DESCRIPTION - PROJECT PROPOSALS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Sections 1-3 must not exceed 17 pages in total.
-\todo{Sections 1--3 must not exceed 17 pages in total.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%  PROJECT DESCRIPTION - PROJECT PROPOSALS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 {\raggedright{} \normalsize \bfseries 
 	Project Description -- Project Proposals \newline \par
 	\applicants{} \newline \par
 	\project{} \par
 	\rule{\textwidth}{0.5pt} \par
-	%Project Description
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  STATE OF THE ART AND PRELIMINARY WORK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%  STATE OF THE ART AND PRELIMINARY WORK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{Starting Point}
 \label{sec:work-report}
+
+\input{background.tex}
 
 \input{state_of_the_art.tex}
 
@@ -86,32 +83,25 @@ fuchs2025varvamp,lamkiewicz2024ribap,galeone2025decoding, % Why the trailing com
 \section{Objectives and work program}
 
 \subsection{Anticipated total duration of the project}
-Financial support is requested for \todo[inline]{three years.}
+Financial support is requested for three years.
 
 \subsection{Objectives}
 \let\oldpara=\theparagraph
 \addtocounter{secnumdepth}{1}
 \renewcommand{\theparagraph}{Goal \arabic{paragraph}}
 
-\paragraph{\textnormal{Goal one is ...}}
+\paragraph{\textnormal{Generate a comprehensive tissue-specific PPI probability database.}}
+We will produce tissue-specific probability scores for $\approx$170,000 known protein-protein interactions across 50 human tissues, creating a novel three-score framework (likelihood, confidence, concordance) that captures both biological probability and data quality.
+
+\paragraph{\textnormal{Validate LLM-derived predictions through orthogonal evidence.}}
+We will demonstrate that LLM-based biological reasoning captures functional relationships invisible to expression-based methods, validated through structural analysis (AlphaFold-Multimer) and independent pathway databases (Reactome).
+
+\paragraph{\textnormal{Create a sustainable, community-accessible resource.}}
+We will deploy an open web platform and a distilled AI model, hosted on dedicated hardware to ensure long-term availability beyond the funding period.
 
 \subsection{Work program including proposed research methods}
-%For each applicant
-\todo{ca.\ 6-8 pages; ca. 4-8 WPs. For each applicant}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%%%%% BEGIN OF WORK PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%\titlespacing*{\paragraph}{0pt}{-0.2\baselineskip}{0.2\baselineskip}
-\addtocounter{secnumdepth}{1}
-%\newcommand\WP{WP\arabic{paragraph}}
-\renewcommand{\theparagraph}{WP\arabic{paragraph}}
-\RedeclareSectionCommand[beforeskip=-2.5ex plus-1ex minus -.2ex,%
-afterskip=2.5ex plus 0.2ex minus 0.2ex]{paragraph}
-%numbered sub-workpackages are supported - just use \subparagraph{}
-\RedeclareSectionCommand[indent=0pt, beforeskip=-3.5ex plus-1ex minus -.2ex,%
-afterskip=2.5ex plus 0.2ex minus 0.2ex]{subparagraph}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The three work packages form an integrated pipeline (\cref{fig:timeline}): \textbf{WP1} generates tissue-specific probability scores using LLM-based biological reasoning and produces a distilled model for efficient inference. \textbf{WP2} validates predictions through structural analysis and extends coverage to the full proteome via a hybrid neuro-symbolic GNN. \textbf{WP3} creates a sustainable community resource with continuous literature-based updates. The requested Mac Studio workstation serves all three phases: as a high-throughput inference engine (WP1), model training platform (WP2), and long-term hosting server (WP3).
 
 \hrulefill
 
@@ -125,226 +115,101 @@ afterskip=2.5ex plus 0.2ex minus 0.2ex]{subparagraph}
 
 \input{wp/wp3.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  END OF WORK PACKAGES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{impact.tex}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  TIMELINE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% This is not directly part of the DFG TRF template, but always helpful in my eyes
+\input{risk_assessment.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%  TIMELINE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \let\theparagraph=\oldpara
 \paragraph*{Time considerations}
 \vspace{-0.5cm}
 \begin{figure}[h]
 	\centering
   	\resizebox{\textwidth}{!}{\includestandalone[mode=tex]{gantt/gantt}}
-	\caption{Workpackage time considerations in months (M) and assigned person-months (PM) for Institute of ABC (ABC) and Institute for CDE (CDE)}
+	\caption{Workpackage time considerations in months (M).}
 	\label{fig:timeline}
 \end{figure}
 
 \subsection{Handling of research data}
-Data generated during this project will be used for scientific publications in
-preprint and peer-reviewed journals. Therefore, all necessary data (such as raw
-sequencing data) will be deposited in publicly available repositories
-(\href{https://www.ncbi.nlm.nih.gov/geo/}{NCBI GEO} and
-\href{https://www.ncbi.nlm.nih.gov/sra}{SRA}, \href{https://osf.io/}{OSF}). To
-allow complete reproducibility of all analyses, the source code and executed
-comands will be also made publicly available
-(\href{https://github.com/}{GitHub}).  Thus, all relevant data will become
-accessible for future use. 
-\todo[inline]{FAIR principles}
+Data generated during this project will be used for scientific publications in preprint and peer-reviewed journals. All necessary raw data will be deposited in publicly available repositories (e.g., NCBI GEO, SRA) to ensure reproducibility. Source code and analysis pipelines will be open-sourced on \textbf{GitHub}, while the trained Student Models and distilled weights will be made publicly available on \textbf{HuggingFace} to facilitate community adoption. All data management practices will adhere to FAIR principles.
 
 \subsection{Relevance of sex, gender and/or diversity}
-\todo[inline]{Text}
+The project analyzes human protein interactions across male and female tissues as provided by the Human Protein Atlas, accounting for biological diversity in interactome modeling.
 
-% Works cited from sections 1 and 2, both by the applicant(s) and by third parties. Please include DOI/URL if available. 
-% A maximum of ten of your own works cited may be highlighted; font at least Arial 9 pt.
 \section{Project- and subject-related list of publications}
 \label{sec:bib}
-\todo{Works cited from sections 1 and 2, both by the applicant(s) and by third parties. Please include DOI/URL if available. A maximum of ten of your own works cited may be highlighted; font at least Arial 9 pt.}
-%\AtNextBibliography{\small}
-% Own literature can be designated with a prefix, default 'E' for "Eigene". 
-% However, this is not necessary anymore since some DFG template change!
-% If the function is still desired, uncomment the "labelprefix" commands directly below this comment 
-% AND in the section: "Literaturverzeichnis zum Stand der Forschung, zu den Zielen und dem Arbeitsprogramm"
-% Then, all your references should be numbered consecutively.
-%\newrefcontext[labelprefix=E]
-\printbibliography[notcategory=reviewed, notcategory=nonreviewed, notcategory=patents_pending, notcategory=patents, heading=none, env=bibliographyNUM]	
+\printbibliography[notcategory=reviewed, notcategory=nonreviewed, notcategory=patents_pending, notcategory=patents, heading=none, env=bibliographyNUM] 	
 
 \backmatter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  SUPPLEMENT  (new since 04/2022) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%  SUPPLEMENT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{Supplementary information on the research context}
-\todo{Section 4 et seq. must not exceed 8 pages.}
 
 \subsection{Ethical and/or legal aspects of the project}
 
 \subsubsection{General ethical aspects}
-\todo[inline]{Text}
+The project uses publicly available, de-identified omics data and does not involve direct human or animal experimentation.
 
 \subsubsection{Descriptions of proposed investigations involving humans, human materials or identifiable data}
-\todo[inline]{Text}
+None.
 
 \subsubsection{Descriptions of proposed investigations involving experiments on animals}
-\todo[inline]{Text}
+None.
 
-\subsubsection{Descriptions of projects involving genetic resources (or associated traditional knowledge) from a foreign country}
-\todo[inline]{Text}
+\subsubsection{Descriptions of projects involving genetic resources from a foreign country}
+None.
 
 \subsubsection{Explanations regarding any possible safety-related aspects}
+The project focuses on computational modeling of protein interactions and does not involve dual-use research of concern.
 
-\subsubsubsection{\enquote{Dual Use Research of Concern}; foreign trade law}
-\todo[inline]{Text}
+\subsubsection{Considerations on aspects of ecological sustainability}
+Computational tasks are optimized for high-efficiency hardware (Apple Silicon) to minimize energy consumption compared to traditional server clusters.
 
-\subsubsubsection{Risks in international cooperation}
-\todo[inline]{Text}
-
-\subsubsection{Considerations on aspects of ecological sustainability in the planning and implementation of the project}
-\todo[inline]{Text}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  PEOPLE/COLLAB/FUNDING  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Employment status information}
-\todo{For each applicant, state the last name, first name, and employment status (including duration of contract and funding body, if on a fixed-term contract)}
+Dr. Chung-Wen Lin, Postdoctoral Researcher at Helmholtz Munich.
+
+\textit{Parental leave:} The applicant took parental leave during July 2022 -- January 2023 and November 2024 -- October 2025. During January 2025 -- October 2025, the applicant worked half-time while on partial parental leave.
 
 \subsection{First-time proposal data}
-\todo{Only if applicable: Last name, first name of first-time applicant}
+Chung-Wen Lin.
 
 \subsection{Composition of the project group}
-\todo{List only those individuals who will work on the project but will not be paid out of the project funds. State each person's name, academic title, employment status, and type of funding. }
+The project group consists of the Principal Investigator and one doctoral researcher.
 
-The following individuals will work on the project but will not be paid out of the project funds:
+\subsection{Researchers in Germany with whom you have agreed to cooperate}
+None.
 
-\begin{itemize}
-\item Dude1
-\item Dude2
-\end{itemize}
-
-\subsection{Researchers in Germany with whom you have agreed to cooperate on this project}
-\todo[inline]{Text}
-
-\subsection{Researchers abroad with whom you have agreed to cooperate on this project}
-\todo[inline]{Text}
+\subsection{Researchers abroad with whom you have agreed to cooperate}
+None.
 
 \subsection{Researchers with whom you have collaborated scientifically within the past three years}
-% This information will help avoid potential conflicts of interest.
 \begin{itemize}
-  \item Prof.\ Dr.\ Dr.\ Foo Bar
+  	\item Prof. Dr. Pascal Falter-Braun (Helmholtz Munich)
 \end{itemize}
 
 \subsection{Project-relevant cooperation with commercial enterprises}
-%If applicable, please note the EU guidelines on state aid or contract your research institution in this regard.
 None.
 
 \subsection{Project-relevant participation in commercial enterprises}
-%Information on connections between the project and the production branch of the enterprise
 None.
 
 \subsection{Scientific equipment}
-%List larger instruments that will be available to you for the project. These may include large computer facilities if computing capacity will be needed.
-\todo[inline]{Text}
-As something can be seen in \cref{fig:some_nice_graph}.
-
-\begin{figure}
-\centering
-\missingfigure{schematics of a souvereign-class warp-reactor}
-\caption{warp reactor}
-\label{fig:some_nice_graph}
-\end{figure}
+Access to institute HPC resources for structural modeling.
 
 \subsection{Other submissions}
-%List any funding proposals for this project and/or major instrumentation previously submitted to a third party.
-\todo[inline]{Text}
+None.
 
 \subsection{Other information}
-%Please use this section for any additional information you feel is relevant which has not been provided elsewhere.
-In submitting a proposal to the DFG, I agree to adhere to the DFG's rules of good scientific practice and the \href{https://www.nature.com/articles/sdata201618}{FAIR principles}.
+In submitting a proposal to the DFG, I agree to adhere to the DFG's rules of good scientific practice and FAIR principles.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  REQUESTED MODULES/FUNDS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Requested modules/funds}
+\paragraph{Use of Generative Models for Content Creation}
+In alignment with the DFG's "Guidelines on the Use of Generative Models for Content Creation" (September 2023 and updated 2025), we declare that generative models (LLMs) are used as core research objects within this proposal (e.g., for PPI reasoning). For the preparation of this proposal, LLMs were used for language editing and structural organization; however, all scientific claims, data interpretation, and technical designs remain the sole responsibility of the applicant.
 
-\subsection{Basic Module}
-
-\subsubsection{Funding for Staff}
-We request funding for one doctoral researcher (PhD Student, TV-L 13, 65\%) for the project duration:
-
-\position{Doctoral Researcher (TV-L 13, 65\%), 36 months}{152100}
-
-\textit{Justification:} The doctoral researcher will be responsible for the implementation of the computational pipelines, including data integration, LLM inference management on the Mac Studio, and GNN model training. This position offers an excellent opportunity for doctoral training at the intersection of Artificial Intelligence and Systems Biology. The Principal Investigator (100\%) will provide intensive supervision and lead the higher-level biological reasoning and project coordination.
-
-\subsubsection{Direct Project Costs}
-
-\subsubsubsection{Equipment up to 10\,000\,\euro, Software and Consumables}
-None.
-
-\subsubsubsection{Travel Expenses}
-We apply for a total of \textbf{10,000\,\euro} for travel expenses.
-
-\subsubsubsection{Visiting Researchers}
-None.
-
-\subsubsubsection{Expenses for Laboratory Animals}
-None.
-
-\subsubsubsection{Other Costs}
-None.
-
-\subsubsubsection{Project-related publication expenses}
-We apply for a total of \textbf{1,500\,\euro} for publication expenses.
-
-\subsubsection{Instrumentation}
-
-\subsubsubsection{Equipment exceeding 10\,000\,\euro}
-\textbf{High-Performance Node (512GB RAM):} 15,000\,\euro.
-
-\subsubsubsection{Major Instrumentation exceeding 50\,000\,\euro}
-None.
-
-\subsection{Module Temporary Position for Principal Investigator}
-We request a full-time position for the Principal Investigator (Eigene Stelle) for 36 months. Total requested: \textbf{252,000\,\euro}.
-
-
-\subsection{Module Replacement Funding}
-\todo[inline]{Text}
-
-\subsection{Module Temporary Clinician Substitute}
-\todo[inline]{Text}
-
-\subsection{Module Mercator Fellows}
-\todo[inline]{Text}
-
-\subsection{Module Workshop Funding}
-\todo[inline]{Text}
-
-\subsection{Module Public Relations}
-\todo[inline]{Text}
-
-\subsection{Module Standard Allowance for Gender Equality Measures}
-\todo{Please detail what measures are planned to promote diversity and equal opportunities. If you are submitting your project proposal within a network, note that this standard allowance may only be applied for within the coordination project. The coordination project must combine all such requests in its calculation.}
-\todo[inline]{Text}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% SIGNATURE - OPTIONAL BC NOT IN THE ORIGINAL DFG TEMPLATE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Signature}
-
-%\includegraphics[width=0.18\textwidth]{/signatures/signature.pdf}\\
-%Dr.\ Martin H\"olzer
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% LoA - OPTIONAL BC NOT IN THE ORIGINAL DFG TEMPLATE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{List of attachments}
-%\begin{itemize}
-%  \item Curriculum Vit\ae, Dr.\ Martin H\"olzer
-%\end{itemize}
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%  REQUESTED MODULES/FUNDS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\input{funds_section.tex}
 
 \end{document}

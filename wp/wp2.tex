@@ -1,4 +1,4 @@
-\paragraph{WP2: Structural Validation and Genome-Scale Expansion (Year 2)}
+\paragraph{WP2: Structural Validation and Genome-Scale Extension (Year 2)}
 \label{wp:2}
 
 \textbf{Objective:} To validate the biological plausibility of LLM-derived interactions using physical structural constraints and to extend predictions to the entire proteome via a Hybrid Neuro-Symbolic approach combining Graph Neural Networks (GNN) with LLM-derived semantic features.
@@ -6,8 +6,7 @@
 \subparagraph{Task 2.1: Structural Validation via AlphaFold-Multimer (Months 13-18)}
 To address the lack of high-throughput experimental validation, we will implement a Physical Gate by leveraging the institute's High-Performance Computing (HPC) resources.
 \begin{itemize}
-    \item \textbf{Target Selection:} We will select the top 5\% high-probability tissue-specific interactions identified in WP1 (approximately 400k pairs). Priority will be given to interfaces containing known pathogenic variants (from ClinVar) to maximize clinical relevance. Negative controls will be drawn from organ-specific PPIs that are definitively non-occurring in the target tissue.
-    \item \textbf{Structural Prediction:} We will deploy AlphaFold-Multimer on the HPC cluster to predict the interface physical stability, specifically analyzing pLDDT and ipTM scores.
+    \item \textbf{Target Selection:} We will implement a tiered validation strategy: (1) For PPIs with existing complex structures in PDB or published interface data, we directly extract pLDDT and ipTM metrics; (2) Novel pairs ($\approx$5,000) will be screened using rapid methods (e.g., ESMFold); (3) A focused subset of $\approx$500 high-priority pairs—including those with ClinVar pathogenic variants at predicted interfaces—will undergo full AlphaFold-Multimer validation. This tiered approach provides robust orthogonal evidence while remaining computationally tractable.
     \item \textbf{Dual-Gating Analysis:} We will correlate the Environmental Probability with the Physical Probability from HPC structural modeling.
 \end{itemize}
 
@@ -16,7 +15,7 @@ While WP1 covers known interactions, we aim to discover novel interactions acros
 \begin{itemize}
     \item \textbf{Heterogeneous Graph Construction:} We will construct tissue-specific Heterogeneous Graphs where nodes represent proteins and edges represent the LLM-derived probabilities. Using a heterogeneous architecture (e.g., Heterogeneous Graph Transformer) allows the model to explicitly account for distinct tissue-specific node features and edge types.
     \item \textbf{Training Strategy:} The GNN will be trained on the Student model's outputs to learn the general, transferable principles of tissue specificity. The Mac Studio transitions during this phase from high-throughput inference (WP1) to model development.
-    \item \textbf{Novel Interaction Prediction:} The trained model will infer tissue-specific probabilities for protein pairs absent from HuRI and BioPlex, generating a complete predicted tissue-resolved interactome.
+    \item \textbf{Inference:} Rather than exhaustive all-to-all prediction, the trained GNN will focus on inferring tissue-specific probabilities for \textbf{prioritized disease-associated subnetworks} and the \textbf{druggable genome}. This targeted expansion to $\sim$10\,million prioritized pairs reduces false positives inherent in genome-wide screening while maximizing translational impact for drug discovery.
 \end{itemize}
 
 \noindent\myTip[1.0\textwidth]{t}{2}{\emph{\vspace*{0.1cm}\textbf{Summary of WP2}\newline

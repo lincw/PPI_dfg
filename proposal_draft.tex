@@ -1,0 +1,141 @@
+\section{Detailed Project Description (Draft)}
+
+\subsection{Background and Significance}
+
+\subsubsection{The Critical Gap in Tissue-Specific Interactomics}
+Protein-protein interactions (PPIs) orchestrate virtually all cellular processes, from metabolic pathways to signal transduction and transcriptional regulation. However, the \textbf{biological reality of PPIs is fundamentally context-dependent}---within any specific tissue, only a subset of possible interactions can physically occur due to differential protein expression, abundance, and localization.
+
+This distinction between \textbf{possible} and \textbf{physiologically relevant} interactions represents one of the most significant challenges in systems biology. Current global interactome databases catalog potential interactions but provide limited insight into \textbf{when and where} these interactions actually occur. For complex diseases that manifest tissue-specifically, this limitation severely constrains our ability to:
+\begin{itemize}
+    \item Understand disease mechanisms at the tissue level.
+    \item Identify therapeutic targets with appropriate tissue context.
+    \item Develop precision medicine approaches based on patient-specific interaction networks.
+    \item Design targeted interventions that account for tissue-specific biology.
+\end{itemize}
+
+\subsubsection{Limitations of Current Computational Approaches}
+Existing methods for tissue-specific PPI prediction face several fundamental challenges:
+\begin{enumerate}
+    \item \textbf{Over-reliance on Co-expression:} Most approaches assume that co-expressed genes indicate interacting proteins. While co-expression is necessary, it is insufficient---many co-expressed proteins never interact.
+    \item \textbf{Limited Biological Reasoning:} Current methods typically employ statistical correlations that lack mechanisms for integrating and reasoning over multi-modal evidence.
+    \item \textbf{Binary Classification Limitations:} Many tools provide binary predictions rather than probabilistic assessments that capture uncertainty.
+    \item \textbf{Incomplete Data Integration:} Effectively integrating diverse modalities (expression, abundance, localization) remains challenging.
+\end{enumerate}
+
+\subsubsection{The LLM Revolution in Biological Computing}
+Large Language Models represent a paradigm shift for biological data analysis:
+\begin{itemize}
+    \item \textbf{Multi-modal Integration:} LLMs can process biological information as natural language, enabling semantic integration of diverse data types.
+    \item \textbf{Biological Knowledge Integration:} Leveraging extensive biological literature for context-aware reasoning.
+    \item \textbf{Probabilistic Assessment:} Generating probabilistic scores with confidence estimates.
+    \item \textbf{Scalable Analysis:} Enabling large-scale analysis through prompt engineering.
+\end{itemize}
+
+\subsection{Preliminary Results and Proof of Concept}
+
+\subsubsection{Experimental Validation Framework}
+To validate our LLM-enhanced approach, we conducted comprehensive analysis using \textbf{205 experimentally-derived schizophrenia (SCZ)-related brain interactions} from Laman Trip et al. as ground truth.
+
+\subsubsection{Multi-Modal Data Integration}
+Our framework integrates five key biological data sources:
+\begin{itemize}
+    \item \textbf{RNA Expression:} Human Protein Atlas (20,162 genes $\times$ 50 tissues).
+    \item \textbf{Protein Abundance:} PaxDB v6.0 (19,566 proteins $\times$ 375 datasets).
+    \item \textbf{Protein Localization:} Human Protein Atlas (13,534 proteins).
+    \item \textbf{Protein Expression (IHC):} Human Protein Atlas (15,302 proteins).
+    \item \textbf{Functional Annotations:} Comprehensive databases.
+\end{itemize}
+
+\subsubsection{Breakthrough Results}
+Our preliminary analysis demonstrates exceptional performance. The most significant finding is that \textbf{complete, high-quality data dramatically outperforms incomplete broad coverage}.
+
+The PaxDB-filtered approach, despite a 77.8% reduction in brain tissue coverage (9 $\to$ 2 tissues), achieved a \textbf{+31.9% improvement} in prediction accuracy:
+\begin{itemize}
+    \item \textbf{F1 Score:} \textbf{0.727} (Optimal $\lambda = 0.6$).
+    \item \textbf{Biological Validation:} 72.7% of SCZ PPIs correctly classified as brain-specific.
+    \item \textbf{Statistical Significance:} $p < 0.001$ (Wilcoxon test) for brain tissue bias.
+\end{itemize}
+
+These results establish a robust proof of concept for the LLM-enhanced tissue-specific PPI prediction framework.
+
+\subsection{Proposed Research Program}
+
+\subsubsection{Overall Objective}
+\textbf{To develop the first comprehensive, genome-scale, tissue-resolved human interactome through LLM-enhanced biological reasoning and knowledge distillation into scalable computational frameworks.}
+
+\subsubsection{Specific Aims}
+
+\paragraph{Aim 1: Large-Scale LLM-Based Tissue-Specific PPI Annotation}
+\textbf{Objective:} Generate comprehensive tissue-specific probability estimates for all known human PPIs.
+\begin{itemize}
+    \item Scale successful framework to complete HuRI dataset ($\approx$53K PPIs $\times$ 50 tissues).
+    \item Implement strategic sampling to reduce costs by 85% while maintaining statistical power.
+    \item Develop automated querying pipeline with quality control.
+\end{itemize}
+
+\paragraph{Aim 2: Knowledge Distillation into Specialized Models}
+\textbf{Objective:} Create efficient, deployable models that replicate LLM reasoning capabilities.
+\begin{itemize}
+    \item \textbf{Specialized LLM Development:} Fine-tune compact models (e.g., Llama-3-8B) on LLM-generated training data.
+    \item \textbf{Performance Benchmarking:} Rigorous evaluation against teacher model and experimental validation.
+\end{itemize}
+
+\paragraph{Aim 3: Graph Neural Network for Genome-Scale Prediction}
+\textbf{Objective:} Develop GNN architecture for complete proteome tissue-specific interaction prediction.
+\begin{itemize}
+    \item Construct tissue-specific protein interaction graphs using LLM-derived scores as training labels.
+    \item Implement multi-layer GNN with tissue-specific node features.
+    \item Generate predictions for all possible protein pairs ($\approx$200M potential interactions).
+\end{itemize}
+
+\subsection{Innovation and Impact}
+
+\subsubsection{Methodological Innovations}
+\begin{enumerate}
+    \item \textbf{First LLM Framework:} Revolutionary application of LLMs as biological reasoning engines.
+    \item \textbf{Natural Language Integration:} Novel approach to combining diverse biological data types through structured prompts.
+    \item \textbf{Knowledge Distillation:} Pioneering application of teacher-student architectures to biological prediction.
+    \item \textbf{Comprehensive Resource:} First genome-scale database of tissue-specific interaction probabilities.
+\end{enumerate}
+
+\subsubsection{Scientific Impact}
+\begin{itemize}
+    \item \textbf{Disease Research:} Tissue-specific pathway analysis for complex diseases.
+    \item \textbf{Drug Discovery:} Context-aware therapeutic target identification.
+    \item \textbf{Precision Medicine:} Patient-specific interaction network modeling.
+    \item \textbf{Dynamic Interactomics:} Foundation for time-resolved, condition-specific networks.
+\end{itemize}
+
+\subsection{Technical Approach and Methods}
+
+\subsubsection{LLM Implementation Strategy}
+\begin{itemize}
+    \item \textbf{Primary Teacher Model:} GPT-OSS-120B (or equivalent Llama-3-70B) with high reasoning effort.
+    \item \textbf{Student Model Candidates:} Llama-3-8B, specialized bio-LLMs.
+    \item \textbf{Fine-tuning Approach:} Instruction-following format with biological reasoning chains.
+\end{itemize}
+
+\subsubsection{Strategic Sampling Methodology}
+We will employ a \textbf{Three-Tier Sampling Strategy} to reduce costs by 85%:
+\begin{enumerate}
+    \item \textbf{Tier 1: Gold Standard (600 samples):} High-confidence literature-curated interactions.
+    \item \textbf{Tier 2: Tissue Diversity (600 samples):} Representative sampling across tissue types.
+    \item \textbf{Tier 3: Edge Cases (300 samples):} Challenging prediction scenarios.
+\end{enumerate}
+
+\subsection{Risk Assessment and Mitigation}
+
+\subsubsection{Technical Risks}
+\begin{itemize}
+    \item \textbf{LLM Performance Variability:} Mitigated by ensemble approaches and robust prompt engineering.
+    \item \textbf{Scalability Challenges:} Mitigated by strategic sampling and efficient distillation.
+\end{itemize}
+
+\subsubsection{Biological Risks}
+\begin{itemize}
+    \item \textbf{Limited Validation Data:} Mitigated by using multiple independent validation datasets and prospective testing.
+    \item \textbf{Tissue Coverage Limitations:} Addressed by the PaxDB-filtered approach (Quality $>$ Coverage).
+\end{itemize}
+
+\subsection{Conclusion}
+This proposal represents a methodological advance in tissue-specific protein interaction prediction, moving from statistical correlation to sophisticated biological reasoning. Our comprehensive validation demonstrates solid realistic performance, and the proposed scaling approach will create the first comprehensive, genome-scale, tissue-resolved human interactome.
