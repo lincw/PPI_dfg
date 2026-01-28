@@ -76,13 +76,9 @@ fuchs2025varvamp,lamkiewicz2024ribap,galeone2025decoding, % Why the trailing com
 \section{Starting Point}
 \label{sec:work-report}
 
-\subsection*{State of the art and preliminary work}
-% For renewal proposals, please report on your previous work. This report
-% should also be understandable without referring to additional literature.
+\input{state_of_the_art.tex}
 
-This is a dummy citation~\cite{lamkiewicz2024ribap}. Yeah. And another one~\cite{assmann2025augmentation}. All citations~\cite{fuchs2025varvamp,galeone2025decoding,raharinirina2025sars} will simply show up in "\ref{sec:bib}~Project- and subject-related list of publications" and which one will be made bold can be changed via the \verb=\addtocategory{important}= command.
-
-\lipsum[1]
+\input{preliminary_results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  OBJECTIVES AND WP %%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,16 +114,16 @@ afterskip=2.5ex plus 0.2ex minus 0.2ex]{subparagraph}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \hrulefill
-\paragraph{First work package.}
-\label{wp:1}
 
 \input{wp/wp1.tex}
 
 \hrulefill
-\paragraph{Second work package.}
-\label{wp:2}
 
 \input{wp/wp2.tex}
+
+\hrulefill
+
+\input{wp/wp3.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  END OF WORK PACKAGES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -272,32 +268,25 @@ In submitting a proposal to the DFG, I agree to adhere to the DFG's rules of goo
 %%%%  REQUESTED MODULES/FUNDS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Requested modules/funds}
-\todo{Explain each item for each applicant (stating last name, first name).}
 
 \subsection{Basic Module}
 
 \subsubsection{Funding for Staff}
-\begin{funds}[funding for staff]
-The following staff positions are requested for \todo[inline]{xx} years each:
+We request funding for one doctoral researcher (PhD Student, TV-L 13, 65\%) for the project duration:
 
-\positionmul{Research associate, TV-L 13, 36 months}{5375}{36}
-\positionmul{Hiwi, TV-L 13, 12 months}{450}{12}
+\position{Doctoral Researcher (TV-L 13, 65\%), 36 months}{152100}
 
-\end{funds}
-
+\textit{Justification:} The doctoral researcher will be responsible for the implementation of the computational pipelines, including data integration, LLM inference management on the Mac Studio, and GNN model training. This position offers an excellent opportunity for doctoral training at the intersection of Artificial Intelligence and Systems Biology. The Principal Investigator (100\%) will provide intensive supervision and lead the higher-level biological reasoning and project coordination.
 
 \subsubsection{Direct Project Costs}
-\begin{funds}[direct project costs]
 
 \subsubsubsection{Equipment up to 10\,000\,\euro, Software and Consumables}
-
-\position{Next-Generation Sequencing, Illumina HiSeq\,2500}{3000}
+None.
 
 \subsubsubsection{Travel Expenses}
-We apply for a total of 10\,000\,\euro\ for travel expenses.
-\position{Travel}{10000}
+We apply for a total of \textbf{10,000\,\euro} for travel expenses.
 
-\subsubsubsection{Visiting Researchers \textnormal{(excluding Mercator Fellows)}}
+\subsubsubsection{Visiting Researchers}
 None.
 
 \subsubsubsection{Expenses for Laboratory Animals}
@@ -307,31 +296,19 @@ None.
 None.
 
 \subsubsubsection{Project-related publication expenses}
-We apply for a total of 1500\euro\ for publication expenses (750\,\euro\ per
-year). Furthermore, we will submit articles to open access preprint repositories
-such as \href{https://www.biorxiv.org/}{\textit{bioRxiv}}.
-\position{Publication costs}{1500}
-
-\end{funds}
+We apply for a total of \textbf{1,500\,\euro} for publication expenses.
 
 \subsubsection{Instrumentation}
 
 \subsubsubsection{Equipment exceeding 10\,000\,\euro}
-Our laboratory is well equipped; all necessary instruments are available.
+\textbf{High-Performance Node (512GB RAM):} 15,000\,\euro.
 
 \subsubsubsection{Major Instrumentation exceeding 50\,000\,\euro}
-Our laboratory is well equipped; all necessary instruments are available.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% The following are additional/other modules one might want to apply for
-%% otherwise, just delete/comment
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\vspace*{2cm}\todo{The following are additional/other modules one might want to apply for. Otherwise, just delete/comment}
+None.
 
 \subsection{Module Temporary Position for Principal Investigator}
-\todo[inline]{Text}
+We request a full-time position for the Principal Investigator (Eigene Stelle) for 36 months. Total requested: \textbf{252,000\,\euro}.
+
 
 \subsection{Module Replacement Funding}
 \todo[inline]{Text}

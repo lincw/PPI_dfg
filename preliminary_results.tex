@@ -1,0 +1,57 @@
+% Preliminary Results
+% This file is included in dfg.tex using \input{preliminary_results}
+
+\subsubsection*{Preliminary results: LLM-driven rescue and enhancement of transcriptomic GNNs}
+
+Current context-specific protein-protein interaction (PPI) estimation methods primarily rely on gene co-expression as a proxy for interaction. While effective for obligate complexes, these methods suffer from systematic limitations:
+
+\begin{enumerate}
+    \item Constitutive expression patterns can confound PPI tissue-specificity. Proteins expressed ubiquitously may appear to interact across all tissues regardless of functional context.
+    \item Asymmetric abundance between interacting partners can bias tissue-specific inference. When one partner is highly abundant while the other is rate-limiting, expression-based methods may overestimate interaction occurrence.
+    \item Post-translational regulation is often ignored.
+\end{enumerate}
+
+Here, I hypothesized that large language models (LLMs), by leveraging the vast biomedical literature, could rescue functional interactions missed by state-of-the-art expression-based graph neural networks (GNNs) and enhance GNN performance when integrated into a hybrid neuro-symbolic model.
+
+I established a robust adversarial comparison across three approaches: \textit{baseline}, \textit{competitor}, and \textit{synthesis}. The \textit{competitor} is the proposed LLM-based probability framework. The \textit{baseline} is a self-supervised transcriptomic GNN (GATv2) optimized for 500 epochs per tissue. The \textit{synthesis} is a hybrid model combining topological (GNN) and semantic (LLM) signals. The evaluation covered 49 human tissues using a head-to-head subset of $\sim$1\,200 PPI-tissue pairs per tissue, validated against the independent Reactome pathway database \cite{Reactome}.
+
+\paragraph*{Key findings}
+
+\begin{enumerate}
+    \item \textbf{The \textit{Rescue} phenomenon:} 
+    Across 49 tissues, we identified 1\,935 specific interactions where the LLM-based framework strongly disagreed with the expression data. These \enquote{rescue} cases represent functional biology invisible to transcriptomics.
+
+    \begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{llc}
+    \hline
+    \textbf{Prediction group} & \textbf{Description} & \textbf{Pathway validation Rate} \\
+    \hline
+    \textbf{LLM rescue} & \textbf{Low GNN / High LLM} & \textbf{10.7\%} (1\,935 cases) \\
+GNN unique & High GNN / Low LLM & 2.5\% (863 cases) \\
+Random baseline & randomly sampled PPIs & $\sim$0.0\% \\
+    \hline
+    \end{tabular}
+    \caption{Validation of PPI predictions against Reactome pathways. The LLM rescue group shows a significantly higher validation rate compared to GNN-unique predictions.}
+    \label{tab:llm_rescue}
+    \end{table}
+
+    The LLM outputs showed superior pathway validation in 44 out of 49 tissues. Notably, in the low expression regime (bottom 50\%), the LLM outputs maintained a 16\% validation rate, compared to just 4\% for the GNN.
+
+    \item \textbf{The \textit{Hybrid} advantage:} 
+    To further evaluate whether combining methods yields superior results, a hybrid model (averaging GNN and LLM probabilities) was tested on 10 diverse tissues.
+    The hybrid model achieved the highest area under the precision-recall curve in 7 out of 10 tissues.
+    While the GNN captures strong co-expression signals (topological/abundance), the LLM captures functional context (semantic/regulatory).
+    A key advantage is that the hybrid approach effectively filters false positives from the GNN and hallucinations from the LLM.
+
+    \item \textbf{Semantic insight:} 
+    Qualitative analysis reveals why the LLM framework succeeds. 
+    For the rescued pair AGBL2--CEP70 (which showed high probability in the cerebral cortex), the LLM framework noted that: \enquote{both proteins act at centrosomal structures and may intersect in microtubule regulation... The interaction is relevant to neuronal ciliary and centrosomal contexts in cortex.}
+    The LLM correctly weighted the functional context (centrosome localization) over transcriptional noise (low basal expression of AGBL2), effectively integrating prior knowledge absent from numerical expression matrices.
+\end{enumerate}
+
+\paragraph*{Conclusion}
+These results demonstrate that the LLM captures functional relationships invisible to transcriptomics-based GNNs, a finding validated by higher pathway enrichment.
+The hybrid neuro-symbolic approach outperforms either method individually, suggesting that the future of systems biology lies in integrating data-driven topology with literature-driven reasoning.
+

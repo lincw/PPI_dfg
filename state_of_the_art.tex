@@ -1,0 +1,18 @@
+\subsection*{State of the art: From Statistical Correlation to Biological Reasoning}
+
+The reconstruction of tissue-specific interactomes represents a frontier in systems biology, moving the field from static "parts lists" to context-aware functional models. However, current computational methodologies face a fundamental "reasoning gap" that limits their predictive accuracy and biological interpretability.
+
+\paragraph{Limitations of Co-expression and Statistical Correlation}
+Traditionally, tissue-specific protein-protein interactions (PPIs) have been inferred by filtering global interactomes through mRNA co-expression data. While co-expression is a necessary prerequisite for interaction (the law of mass action), it is demonstrably insufficient. A significant fraction of co-expressed proteins never interact due to mismatched subcellular localization, incompatible molecular functions, or low protein-level abundance. Recent studies, notably by \textcite{LamanTrip2025}, have shown that protein co-abundance (derived from mass spectrometry) provides a superior signal compared to mRNA (AUROC 0.80 vs 0.70). However, even co-abundance remains a \emph{proxy} for interaction, failing to capture the structural and biochemical logic that dictates whether two proteins \emph{actually} bind in a specific physiological context.
+
+\paragraph{Critique of Contemporary AI Architectures}
+Modern deep learning approaches have attempted to address these limitations but remain constrained by their architectural assumptions:
+\begin{itemize}
+    \item \textbf{SPIDER} \cite{SPIDER} utilizes graph attention networks to predict cell-type-specific networks. While effective, it requires high-quality experimentally-derived networks for supervision, which are unavailable for the vast majority of human tissues.
+    \item \textbf{PINNACLE} \cite{PINNACLE} generates context-aware representations across 156 cell types. However, its primary output consists of latent embeddings rather than explicit, probabilistic assessments of interaction occurrence. These "black-box" models lack a mechanism to integrate multi-modal semantic evidence (e.g., functional annotations and literature-derived context) in a biologically nuanced way.
+\end{itemize}
+
+\paragraph{The Emerging Paradigm: LLMs as Biological Reasoning Engines}
+The recent breakthrough in Large Language Models (LLMs) offers a novel path forward. Unlike traditional machine learning models that treat biological data as purely numerical vectors, LLMs can process information semantically. As demonstrated in our preliminary work, LLMs can act as "biological reasoning engines," integrating diverse modalities---RNA expression, protein abundance, subcellular compartments, and functional logic---into a unified decision-making framework. This approach mimics the cognitive process of a systems biologist, evaluating not just \emph{if} two proteins are present, but \emph{why} they are likely to interact given the specific tissue environment.
+
+By combining the **semantic reasoning** of LLMs with the **topological efficiency** of GNNs and the **physical rigor** of AlphaFold, this project aims to bridge the gap between statistical correlation and functional reality, creating the first truly reasoned, structurally-validated tissue-resolved human interactome.

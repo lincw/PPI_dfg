@@ -1,17 +1,38 @@
-\lipsum[1]
+\paragraph{WP1: Generation of a Tissue-Specific PPI Probability Profile via LLM Reasoning (Year 1)}
+\label{wp:1}
 
-\subparagraph*{Investigation of unique characteristics of the \emph{Myotis} immune system}
-\lipsum[2]
+\textbf{Objective:} To utilize the requested high-memory workstation, acquired at the project's commencement, as a biological reasoning engine to estimate the likelihood of $\approx$180,000 known protein-protein interactions (PPIs) occurring across 50 major human tissues, followed by knowledge distillation into efficient local models.
 
-\bigskip
-% I am sorry, you have to change the wp number here manually {1}
-% but hey, you get a nice summary box!
-\noindent\myTip[1.0\textwidth]{t}{1}{\emph{\vspace*{0.1cm}\textbf{Summary}\newline
-\textbf{Aim:}
-In this work package,  \newline
-\textbf{Method:}
-Based on our unique  \newline
-\textbf{Outcome:}
-\lipsum[1]
+\subparagraph{Task 1.1: Multi-modal Data Integration and Prompt Engineering (Months 1-3)}
+We will integrate five key biological data sources to construct context-aware prompts:
+(1) consensus RNA expression (nTPM) from the Human Protein Atlas,
+(2) protein abundance (ppm) from PaxDB v6.0,
+(3) immunohistochemistry-based protein detection from the Human Protein Atlas,
+(4) subcellular localization annotations, and
+(5) tissue-specific Gaussian Mixture Model (GMM) expression profiles.
+To ensure data integrity, we will implement a robust data harmonization pipeline using Ensembl IDs as the primary key, resolving identifier conflicts across multi-modal sources. The GMM approach automatically discovers biologically meaningful expression regimes (basal, housekeeping, tissue-relevant, tissue-specific) for each tissue, replacing arbitrary percentile cutoffs with data-driven, adaptive thresholds.
+
+The requested Mac Studio will be used during this phase to perform initial pilot runs and prompt optimization using large-scale open-weights models (e.g., gpt-oss-120b or Llama-3-70b).
+In preliminary studies on 205 experimentally validated brain-specific PPIs related to schizophrenia, our framework achieved an AUROC of 0.86, substantially outperforming expression-only baselines (AUROC 0.72).
+
+\subparagraph{Task 1.2: High-Throughput "In Silico" Inference (Months 4-8)}
+This task represents the core computational experiment utilizing the \textbf{Mac Studio (512GB RAM)}.
+\begin{itemize}
+    \item \textbf{Scale:} We will process the combinatorial space of $\approx$170,000 interactions $\times$ 50 tissues, resulting in $\approx$8.5 million unique queries.
+    \item \textbf{Implementation:} We will deploy optimized large models locally on the 512GB unified memory architecture using mature, high-efficiency deployment tools for the Apple Silicon ecosystem (e.g., \textbf{Ollama}, MLX). Based on pilot experiments ($\approx$6 seconds per query), running 10 parallel model instances will complete all queries within approximately 8 weeks. To manage computational risk, the workflow supports dynamic load balancing, prioritizing interactions with high biological relevance or data completeness.
+    \item \textbf{Three-Score Output:} For each PPI-tissue pair, the LLM generates three complementary scores: (1) \emph{Likelihood} (0--100): the biological probability of interaction occurrence; (2) \emph{Confidence} (0--100): the certainty of assessment based on data quality and completeness; and (3) \emph{Concordance}: a computationally derived measure of expression regime agreement between interaction partners, calculated from the GMM classifications. Importantly, the framework explicitly handles missing data (e.g., proteins lacking IHC or subcellular annotations) by treating absence as uncertainty rather than negative evidence, with appropriate penalties to the confidence score.
+    \item \textbf{Hardware Lifecycle:} Following completion of the high-throughput inference phase, the Mac Studio will transition to support GNN training (WP2) and ultimately serve as a dedicated long-term hosting server for the public web platform (WP3), ensuring project sustainability beyond the funding period.
+\end{itemize}
+
+\subparagraph{Task 1.3: Knowledge Distillation and Efficient Model Creation (Months 9-12)}
+The Mac Studio remains essential for the distillation phase.
+\begin{itemize}
+    \item \textbf{Dataset Construction:} Reasoning traces generated in Task 1.2 will be processed into instruction-following pairs, preserving the biological rationale alongside numerical scores.
+    \item \textbf{Student Model Training:} We will perform supervised fine-tuning (SFT) of parameter-efficient models (e.g., Llama-3-8B) on the Mac Studio. The 512GB RAM allows for high-throughput training with large batch sizes even when using complex teacher-student distillation frameworks.
+\end{itemize}
+
+\noindent\myTip[1.0\textwidth]{t}{1}{\emph{\vspace*{0.1cm}\textbf{Summary of WP1}\newline
+\textbf{Aim:} Generate a complete tissue-resolved interactome map and a portable prediction tool.\newline
+\textbf{Method:} High-throughput inference using a novel three-score framework (likelihood, confidence, concordance) with GMM-based adaptive thresholds, followed by knowledge distillation.\newline
+\textbf{Outcome:} A database of 8.5M tissue-specific probabilities and an open-source, lightweight AI model.
 }}
-

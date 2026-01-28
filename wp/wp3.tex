@@ -1,0 +1,30 @@
+\paragraph{WP3: Automated Validation Agents and Community Platform (Year 3)}
+\label{wp:3}
+
+\textbf{Objective:} To deploy automated AI agents for continuous literature-based verification, develop a user-friendly public resource, and demonstrate clinical utility through disease-specific case studies.
+
+\subparagraph{Task 3.1: Automated Literature Mining Agents (Months 25-30)}
+To scale validation beyond structural prediction, we will leverage the reasoning capabilities of our LLM infrastructure to mine the vast biomedical literature.
+\begin{itemize}
+    \item \textbf{Agent Development:} We will develop autonomous ``Research Agents'' powered by the distilled Student model from WP1. These agents will query PubMed/PMC for specific protein pairs, retrieving abstracts and full-text sections that mention both proteins in tissue-specific contexts.
+    \item \textbf{Evidence Synthesis:} Agents will identify indirect evidence supporting or refuting predicted interactions, including: co-citation in tissue-specific studies, shared pathway annotations in KEGG/Reactome, co-occurrence in disease-gene databases (e.g., DisGeNET), and mentions of regulatory relationships. To avoid circular reasoning, we will exclude training-set literature and prioritize post-2024 publications.
+    \item \textbf{Continuous Update:} The system will run periodically (monthly), updating confidence scores as new experimental evidence emerges, effectively creating a ``living'' interactome that evolves with the literature.
+\end{itemize}
+
+\subparagraph{Task 3.2: Web Platform and Disease Application (Months 31-36)}
+The final phase focuses on dissemination and demonstrating translational value.
+\begin{itemize}
+    \item \textbf{Public Web Server:} We will launch a user-friendly web portal where users can query any protein pair and receive a comprehensive report containing: (1) Tissue-specific probabilities across 50 tissues with GMM-based expression context, (2) Pre-computed structural interface metrics (pLDDT, ipTM), and (3) Automated literature summaries with evidence provenance. The platform will be containerized (Docker/Singularity) for long-term maintainability and designed for potential integration with community resources (e.g., STRING, IntAct, ELIXIR).
+    \item \textbf{Long-Term Sustainability:} The Mac Studio requested in this proposal will transition from its primary role as a high-throughput inference engine (WP1) to a dedicated hosting server post-funding. Its 512GB unified memory can simultaneously serve the web platform, run the distilled Student model for on-demand queries, and execute periodic literature-mining updates---ensuring the resource remains ``living'' without recurring cloud infrastructure costs. This hardware-as-legacy approach guarantees continued community access beyond the funding period.
+    \item \textbf{Disease Case Studies:} We will demonstrate the platform's utility through two complementary case studies:
+    \begin{enumerate}
+        \item \emph{Schizophrenia (brain):} We select this disease because experimentally validated brain-specific PPIs (n=205) from recent synaptosome pulldown studies provide rigorous ground truth for benchmarking. The brain represents a unique challenge due to its high alternative splicing complexity.
+        \item \emph{Cardiac arrhythmias (heart):} Ion channel complexes identified as hub proteins in our brain analysis have cardiac paralogs. The heart provides a distinct physiological context characterized by high metabolic demand and mechanical stress. Validating across these two extremes ensures the framework's generalizability across diverse organ systems.
+    \end{enumerate}
+\end{itemize}
+
+\noindent\myTip[1.0\textwidth]{t}{3}{\emph{\vspace*{0.1cm}\textbf{Summary of WP3}\newline
+\textbf{Aim:} Disseminate results and provide continuous, automated validation.\newline
+\textbf{Method:} LLM-driven literature agents with circular-reasoning safeguards, containerized web platform, and dual disease case studies.\newline
+\textbf{Outcome:} A ``living'', accessible tissue-specific interactome resource for the scientific community, hosted on dedicated hardware that ensures long-term sustainability beyond the funding period.
+}}
